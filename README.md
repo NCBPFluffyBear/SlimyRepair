@@ -1,20 +1,12 @@
-# Slimefun4 Addon
-This is an example Repository for a generic Slimefun4 Addon.
-In the top left is a button "Use this template", click this to create your own Addon for Slimefun4 using this basic template.
+# SlimyRepair
+This Slimefun4 addon makes it easier to repair Slimefun tools and weapons!
 
-## How to create your own addon.
-This is a template repository that you can use to create your own Slimefun4 Addon.<br>
-We have also written an extensive step-by-step tutorial which you can find here:<br>
-https://github.com/TheBusyBiscuit/Slimefun4/wiki/Developer-Guide
+To add a Slimefun weapon/tool to the repair list, simply follow the format provided in the example [repairs.yml](https://github.com/NCBPFluffyBear/SlimyRepair/blob/master/src/main/resources/repairs.yml) file. This file can be located locally at `\<YOUR_SERVER_LOCATION>\plugins\SlimyRepair\repairs.yml`
 
-## Changing some important things
-Navigate to `src/main/java` and rename the package and the .java File to your liking.<br>
-Suggestion: "me.yourname.yourproject" (all lower case) and "ProjectName.java"<br>
-Example: "me.thebusybiscuit.cooladdon" and "CoolAddon.java"
-
-Navigate to `src/main/resources/plugin.yml` and change the "author" and "main" attributes.
-You may also want to change the description to something meaningful.
-
-Navigate to `pom.xml` and change the group id to "me.%Your name%" and change the artifact id to the name of your Project.
-
-After that you are good to go, you can now start developing your own Addon for Slimefun4.
+### Line-by-line description:
+```yml
+<Name of the Slimefun Item by ID>:
+  material: <Material to repair the item. Accepts both vanilla (use the material name) and Slimefun (use the ID) items.>
+  material-type: <Either VANILLA or SLIMEFUN>
+  repair-amount: <The durability this item restores per repair>
+```
