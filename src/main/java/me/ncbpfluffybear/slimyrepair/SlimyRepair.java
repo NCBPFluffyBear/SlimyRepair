@@ -1,7 +1,7 @@
 package me.ncbpfluffybear.slimyrepair;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import javafx.util.Pair;
+import me.mrCookieSlime.CSCoreLibPlugin.cscorelib2.collections.Pair;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;

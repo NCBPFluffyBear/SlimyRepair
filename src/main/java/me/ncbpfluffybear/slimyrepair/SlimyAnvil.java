@@ -2,15 +2,11 @@ package me.ncbpfluffybear.slimyrepair;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
-import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemHandler;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -22,7 +18,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * The {@link SlimyAnvil} is a block that repairs
@@ -71,7 +66,7 @@ public class SlimyAnvil extends SlimefunItem implements RecipeDisplayItem {
                     // Show the material needed to repair the item
                     if (!p.isSneaking()) {
 
-                        ItemStack repairItem = SlimyRepair.repairMap.get(sfItem).getKey();
+                        ItemStack repairItem = SlimyRepair.repairMap.get(sfItem).getFirstValue();
                         String itemName;
                         if (repairItem instanceof SlimefunItemStack) {
                             itemName = repairItem.getItemMeta().getDisplayName();
@@ -80,7 +75,7 @@ public class SlimyAnvil extends SlimefunItem implements RecipeDisplayItem {
                         }
                         send(p, "&aThis item can be repaired!" +
                             "\n  &bRequires: &e" + itemName +
-                            "\n  &bRepairs: &e" + SlimyRepair.repairMap.get(sfItem).getValue() + " Durability" +
+                            "\n  &bRepairs: &e" + SlimyRepair.repairMap.get(sfItem).getSecondValue() + " Durability" +
                             "\n  &6Sneak and right click the Slimy Anvil to repair this item!!");
                         return;
                     }
@@ -93,12 +88,12 @@ public class SlimyAnvil extends SlimefunItem implements RecipeDisplayItem {
                     }
 
                     // Check for materials then fix
-                    if (p.getInventory().containsAtLeast(SlimyRepair.repairMap.get(sfItem).getKey(), 1)) {
+                    if (p.getInventory().containsAtLeast(SlimyRepair.repairMap.get(sfItem).getFirstValue(), 1)) {
 
                         int damage = damageable.getDamage();
 
-                        p.getInventory().removeItem(SlimyRepair.repairMap.get(sfItem).getKey());
-                        damageable.setDamage(damage - SlimyRepair.repairMap.get(sfItem).getValue());
+                        p.getInventory().removeItem(SlimyRepair.repairMap.get(sfItem).getFirstValue());
+                        damageable.setDamage(damage - SlimyRepair.repairMap.get(sfItem).getSecondValue());
                         item.setItemMeta(meta);
 
                         send(p, "&aYour item has been repaired!");
@@ -118,10 +113,10 @@ public class SlimyAnvil extends SlimefunItem implements RecipeDisplayItem {
         SlimyRepair.repairMap.forEach((key, mat) -> {
             ItemStack item = key.getItem().clone();
             ItemMeta meta = item.getItemMeta();
-            ((Damageable) meta).setDamage(item.getType().getMaxDurability() - mat.getValue());
+            ((Damageable) meta).setDamage(item.getType().getMaxDurability() - mat.getSecondValue());
             item.setItemMeta(meta);
             displayRecipes.add(item);
-            displayRecipes.add(mat.getKey());
+            displayRecipes.add(mat.getFirstValue());
         });
 
 
