@@ -1,10 +1,10 @@
 package me.ncbpfluffybear.slimyrepair;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.collections.Pair;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -43,7 +43,7 @@ public class SlimyRepair extends JavaPlugin implements SlimefunAddon {
         }
 
         for (String key : repairs.getKeys()) {
-            SlimefunItem sfItem = SlimefunItem.getByID(key);
+            SlimefunItem sfItem = SlimefunItem.getById(key);
             String matType = repairs.getString(key + ".material-type");
 
             if (sfItem != null) {
@@ -58,7 +58,7 @@ public class SlimyRepair extends JavaPlugin implements SlimefunAddon {
                     }
 
                 } else if (matType.equalsIgnoreCase("slimefun")) {
-                    SlimefunItem sfMat = SlimefunItem.getByID(material);
+                    SlimefunItem sfMat = SlimefunItem.getById(material);
 
                     if (sfMat != null) {
                         repairMap.put(sfItem, new Pair<>(sfMat.getItem(), repairAmt));
