@@ -93,7 +93,8 @@ public class SlimyAnvil extends SlimefunItem implements RecipeDisplayItem {
                         int damage = damageable.getDamage();
 
                         p.getInventory().removeItem(SlimyRepair.repairMap.get(sfItem).getFirstValue());
-                        damageable.setDamage(damage - SlimyRepair.repairMap.get(sfItem).getSecondValue());
+                        int newDamage = damage - SlimyRepair.repairMap.get(sfItem).getSecondValue();
+                        damageable.setDamage(Math.max(newDamage, 0));
                         item.setItemMeta(meta);
 
                         send(p, "&aYour item has been repaired!");
